@@ -1,14 +1,14 @@
-const { ethers } = require('ethers');
+const { InfuraProvider, Contract } = require('ethers');
 
 const fs = require('fs');
 const { getIssueNumber } = require('./getIssue.js');
 
-const filePath = 'allTokensOwnersSplit1.json';
+const filePath = 'allTokens.json';
 const contractABI = require('./huxley.json');
 
 const network = 'mainnet';
 const infuraKey = '';
-const provider = new ethers.providers.InfuraProvider(network, infuraKey);
+const provider = new InfuraProvider(network, infuraKey);
 
 const contractAddress123 = '0x9ca8887d13bc4591ae36972702fdf9de2c97957f';
 const contractAddress4 = '0xc65eF668114A1d0446F960Ac4cAa8c080eFAB786';
@@ -19,11 +19,11 @@ async function checkRedeemed(issue, tokenId) {
 	console.log(tokenId)
   let contract;
   if (issue == 1 || issue == 2 || issue == 3) {
-    contract = new ethers.Contract(contractAddress123, contractABI, provider);
+    contract = new Contract(contractAddress123, contractABI, provider);
   } else if (issue == 4) {
-    contract = new ethers.Contract(contractAddress4, contractABI, provider);
+    contract = new Contract(contractAddress4, contractABI, provider);
   } else if (issue == 5 || issue == 6) {
-    contract = new ethers.Contract(contractAddress56, contractABI, provider);
+    contract = new Contract(contractAddress56, contractABI, provider);
   }
 
   try {
